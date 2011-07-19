@@ -23,6 +23,6 @@ app.configure 'development', ->
   watcher.watch()
   
 app.get '/', (req, res) ->
-  res.send templates['index']({name: 'Jim'})
+  res.send templates['index']({name: 'World'})
   
-app.listen 8003
+app.listen process.env.PORT || 8001

@@ -28,8 +28,8 @@
   });
   app.get('/', function(req, res) {
     return res.send(templates['index']({
-      name: 'Jim'
+      name: 'World'
     }));
   });
-  app.listen(8003);
+  app.listen(process.env.PORT || 8001);
 }).call(this);

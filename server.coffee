@@ -1,14 +1,14 @@
 express   = require 'express'
 path      = require 'path'
 _         = require 'underscore'
-Watcher   = require('./util/watcher').watcher
+#Watcher   = require('./util/watcher').watcher
 Settings  = require 'settings'
 
 templates      = {}
 settings       = new Settings(path.join __dirname, 'config/environment.js').getEnvironment()
-watcher        = new Watcher settings.watcherOptions, templates
+#watcher        = new Watcher settings.watcherOptions, templates
 
-watcher.compileTemplates()
+#watcher.compileTemplates()
 
 app = express.createServer()
 
@@ -19,8 +19,8 @@ app.configure ->
   app.use express.cookieParser maxAge: settings.cookieMaxAge
   app.use express.session secret: settings.cookieSecret
 
-app.configure 'development', ->
-  watcher.watch()
+#app.configure 'development', ->
+#  watcher.watch()
   
 app.get '/', (req, res) ->
   res.send templates['index']({name: 'World'})

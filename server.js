@@ -1,14 +1,11 @@
 (function() {
-  var Settings, Watcher, app, express, path, settings, templates, watcher, _;
+  var Settings, app, express, path, settings, templates, _;
   express = require('express');
   path = require('path');
   _ = require('underscore');
-  Watcher = require('./util/watcher').watcher;
   Settings = require('settings');
   templates = {};
   settings = new Settings(path.join(__dirname, 'config/environment.js')).getEnvironment();
-  watcher = new Watcher(settings.watcherOptions, templates);
-  watcher.compileTemplates();
   app = express.createServer();
   app.configure(function() {
     app.use(express.errorHandler(settings.errorHandling));
@@ -22,9 +19,6 @@
     return app.use(express.session({
       secret: settings.cookieSecret
     }));
-  });
-  app.configure('development', function() {
-    return watcher.watch();
   });
   app.get('/', function(req, res) {
     return res.send(templates['index']({

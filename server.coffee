@@ -8,7 +8,20 @@ templates      = {}
 settings       = new Settings(path.join __dirname, 'config/environment.js').getEnvironment()
 #watcher        = new Watcher settings.watcherOptions, templates
 
+
+
+fs            = require 'fs'
+indexFilePath = 'templates/index.html' 
+
 #watcher.compileTemplates()
+compileTemplate = (file) ->
+  templateName = path.basename file, path.extname(file)
+  fs.readFile file, 'utf8', (err, data) =>
+    return console.log(err) if err
+    compiled = _.template data 
+    templates[templateName] = compiled
+
+compileTemplate indexFilePath
 
 app = express.createServer()
 

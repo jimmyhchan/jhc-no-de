@@ -11,7 +11,8 @@ exports.development =
     dumpExceptions:       true
     showStack:            true      
   watcherOptions: 
-    compass:              'config/config.rb'
+    #compass:              'config/config.rb'
+    compass:              ''
     verbose:              true
     package:              'config/jammit.yml'
     packageOut:           'public/js'
